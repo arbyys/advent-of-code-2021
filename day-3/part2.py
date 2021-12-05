@@ -19,17 +19,12 @@ def searchData(givenData, mostCommon):
             occurences = {"0": 0, "1": 0}
             for binary in dataFunc:
                 occurences[binary[i]] += 1
-            for z,binary in enumerate(dataFunc):
-                if(int(occurences["0"]) == int(occurences["1"])):
-                    bitToKeep = int(mostCommon)
-                else:
-                    bitToKeep = int(max(occurences, key=occurences.get) if mostCommon else min(occurences, key=occurences.get))
+            for binary in dataFunc:
+                bitToKeep = int(mostCommon) if int(occurences["0"]) == int(occurences["1"]) else (int(max(occurences, key=occurences.get) if mostCommon else min(occurences, key=occurences.get)))
                 if((int(binary[i]) == bitToKeep)):
                     tempArray.append(binary)
             if(len(dataFunc) <= 1):
                 return dataFunc[0]
-
-
 
 generator = searchData(data, True)
 scrubber = searchData(data, False)
