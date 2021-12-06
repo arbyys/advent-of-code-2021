@@ -39,8 +39,6 @@ for i,instruction in enumerate(data):
         else:
             coordsListY = list(range(coordsY[0], coordsY[1]+1))
 
-    if(not((len(set(coordsListX)) < 2) or (len(set(coordsListY)) < 2))):
-        continue
     for index in range(len(coordsListX)):
         grid[coordsListY[index]][coordsListX[index]] += 1
 
@@ -51,5 +49,3 @@ for row in grid:
         if(item >= 2):
             totalCount+=1
 print(totalCount)
-
-# 5787 too low
