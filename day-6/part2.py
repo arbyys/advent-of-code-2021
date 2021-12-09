@@ -1,32 +1,23 @@
 from aocd import get_data
-import numpy as np
-import math
-import sys
-from statistics import linear_regression
+from collections import Counter
 
 data = get_data(day=6, year=2021)
 data = data.split(",")
 data = [*map(int, data)]
 
-school = {0:0,1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0}
-total = len(data)
-for fish in data:
-    school[fish] += 1
+fishes = dict(Counter(data))
+fishes[-1] = 0
 
-for day in range(256):
+NUMBER_OF_DAYS = 256
 
-    placeholder = school[0]
-    school[0] = school[1]
-    school[1] = school[2]
-    school[2] = school[3]
-    school[3] = school[4]
-    school[4] = school[5]
-    school[5] = school[6]
-    school[6] = school[7]
-    school[7] = school[8]
-    school[6] += placeholder
-    school[8] = placeholder
+for day in range(NUMBER_OF_DAYS):
+    for num in range(-1, 8):
+        if(fishes.get(num+1) == None):
+            fishes[num] = 0
+            continue
+        fishes[num] = fishes.get(num+1)
+    fishes[8] = fishes[-1]
+    fishes[6] += fishes[-1]
+    fishes[-1] = 0
 
-    total += placeholder
-
-print(total)
+print(sum(fishes.values()))

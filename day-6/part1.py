@@ -1,20 +1,23 @@
 from aocd import get_data
+from collections import Counter
 
 data = get_data(day=6, year=2021)
 data = data.split(",")
 data = [*map(int, data)]
 
+fishes = dict(Counter(data))
+fishes[-1] = 0
+
 NUMBER_OF_DAYS = 80
 
-for day in range(1, NUMBER_OF_DAYS+1):
-    fishesBorn = 0
-    for index,fish in enumerate(data):
-        if(fish == 0):
-            fishesBorn += 1
-            data[index] = 6
-        else:
-            data[index] = data[index]-1
-    for i in range(fishesBorn):
-        data.append(8)
+for day in range(NUMBER_OF_DAYS):
+    for num in range(-1, 8):
+        if(fishes.get(num+1) == None):
+            fishes[num] = 0
+            continue
+        fishes[num] = fishes.get(num+1)
+    fishes[8] = fishes[-1]
+    fishes[6] += fishes[-1]
+    fishes[-1] = 0
 
-print(len(data))
+print(sum(fishes.values()))
