@@ -25,6 +25,4 @@ for position in range(min(data), max(data)+1):
     if(fuelEachIter < fuelUsed):
         fuelUsed = fuelEachIter
         positionAlignedTo = position
-    print("{}/{}".format(position,max(data)))
-print("========")
 print(fuelUsed)
