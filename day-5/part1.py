@@ -51,5 +51,3 @@ for row in grid:
         if(item >= 2):
             totalCount+=1
 print(totalCount)
-
-# 5787 too low
