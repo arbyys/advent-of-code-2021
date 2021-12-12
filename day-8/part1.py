@@ -4,10 +4,6 @@ data = get_data(day=8, year=2021)
 data = data.splitlines()
 #data = [*map(int, data)]
 
-with open('i.txt') as file:
-    data = file.read().splitlines()
-    #data = list(map(int, data)) # to int
-
 totalCount = 0
 for line in data:
     segments = line.split(" | ")[1]
