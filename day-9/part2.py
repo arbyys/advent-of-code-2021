@@ -27,46 +27,6 @@ def checkAdjancedElement(rowIndex, colIndex, direction):
         return True
     return False
 
-def findCrossIndexes(rowIndex, colIndex):
-    indexesRows = [[rowIndex, colIndex]]
-    indexesCols = []
-    for dir in range(-1,2,2):
-        tempColIndex = colIndex+dir
-        while True:
-            if((tempColIndex == -1 or tempColIndex == len(data[0])) or data[rowIndex][tempColIndex] == 9):
-                break
-            indexesRows.append([rowIndex, tempColIndex])
-            tempColIndex += dir
-    for dir in range(-1,2,2):
-        tempRowIndex = rowIndex+dir
-        while True:
-            if((tempRowIndex == -1 or tempRowIndex == len(data)) or data[tempRowIndex][colIndex] == 9):
-                break
-            indexesCols.append([tempRowIndex, colIndex])
-            tempRowIndex += dir
-
-    return (list(map(list,set(map(tuple,indexesRows)))),list(map(list,set(map(tuple,indexesCols)))))
-
-def findLineIndexes(rowIndex, colIndex, type):
-    indexes = [[rowIndex, colIndex]]
-    for dir in range(-1, 2, 2):
-        if(type == "row"):
-            tempColIndex = colIndex+dir
-            while True:
-                if((tempColIndex == -1 or tempColIndex == len(data[0])) or data[rowIndex][tempColIndex] == 9):
-                    break
-                indexes.append([rowIndex, tempColIndex])
-                tempColIndex += dir
-        elif(type == "col"):
-            tempRowIndex = rowIndex+dir
-            while True:
-                if((tempRowIndex == -1 or tempRowIndex == len(data)) or data[tempRowIndex][colIndex] == 9):
-                    break
-                indexes.append([tempRowIndex, colIndex])
-                tempRowIndex += dir
-    return (list(map(list,set(map(tuple,indexes)))))
-
-
 lowPoints = []
 for indexRow,row in enumerate(data):
     for indexCol,element in enumerate(row):
@@ -79,11 +39,11 @@ for indexRow,row in enumerate(data):
 
 allLengths = []
 for lowPoint in lowPoints:
-    print()
-    
+    print(lowPoint, data[lowPoint[0]][lowPoint[1]])
+
 allLengths.sort()
 allLengths = allLengths[-3:]
-print(allLengths)
-print(math.prod(allLengths))
+#print(allLengths)
+#print(math.prod(allLengths))
 
 # too low 1071000
