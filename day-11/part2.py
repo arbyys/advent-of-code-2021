@@ -23,10 +23,9 @@ def flash(rowIndex, colIndex):
         data[rowIndex+1][colIndex+1] += 1 # down right
     if((rowIndex != 0) and (colIndex != len(data[0])-1)):
         data[rowIndex-1][colIndex+1] += 1 # top right
-totalFlashes = 0
 
-for step in range(1, 101):
-
+step = 1
+while True:
     data = [[y+1 for y in x] for x in data]
     alreadyFlashed = []
     while True:
@@ -35,12 +34,13 @@ for step in range(1, 101):
             for indexOctopus,octopus in enumerate(line):
                 if((octopus > 9) and ([indexLine, indexOctopus] not in alreadyFlashed)):
                     query = True
-                    totalFlashes += 1
                     flash(indexLine, indexOctopus)
                     alreadyFlashed.append([indexLine, indexOctopus])
         if(not query):
             break
     for octopusCoords in alreadyFlashed:
         data[octopusCoords[0]][octopusCoords[1]] = 0
-    #print("after step {} there have been {} flashes".format(step, totalFlashes))
-print(totalFlashes)
+    if(sum([sum(x) for x in data]) == 0):
+        print(step)
+        break
+    step += 1
