@@ -4,12 +4,6 @@ data = get_data(day=13, year=2021)
 
 instructions = data.split("\n\n")[1].splitlines()
 data = data.split("\n\n")[0].splitlines()
-#data = [*map(int, data)]
-
-#with open("input.txt") as file:
-#    file = file.read()
-#    data = file.split("\n\n")[0].splitlines()
-#    instructions = file.split("\n\n")[1].splitlines()
 
 def reverseList(axis, list):
     tempList = list.copy()
@@ -36,17 +30,12 @@ def splitGrid(axis, number):
             firstHalf.append(row)
     return firstHalf, secondHalf
 
-size=[0,0]
-for coords in data:
-    current = [*map(int, coords.split(","))]
-    if(current[0] > size[0]):
-        size[0] = current[0]
-    elif(current[1] > size[1]):
-        size[1] = current[1]
+numberOfRows = int(instructions[1].split(" ")[2].split("=")[1])*2
+numberOfCols = int(instructions[0].split(" ")[2].split("=")[1])*2
 
 grid = []
-for x in range(size[1]+1):
-    grid.append([0]*(size[0]+1))
+for x in range(numberOfRows+1):
+    grid.append([0]*(numberOfCols+1))
 
 for coords in data:
     current = [*map(int, coords.split(","))]
@@ -57,13 +46,7 @@ for numInstruction,instruction in enumerate(instructions):
         break
     current = instruction.split(" ")[2].split("=")
     firstHalf, secondHalf = splitGrid(current[0], int(current[1]))
-    print("===============================")
-    for x in firstHalf:
-        print(x)
-    print("____")
     secondHalf = reverseList(current[0], secondHalf)
-    for x in secondHalf:
-        print(x)
 
     mergedList = []
     for rowIndex in range(len(firstHalf)):
@@ -72,14 +55,7 @@ for numInstruction,instruction in enumerate(instructions):
             currentRow.append(firstHalf[rowIndex][colIndex] + secondHalf[rowIndex][colIndex])
         mergedList.append(currentRow.copy())
 
-    print("===============================")
-    for x in mergedList:
-        print(x)
     grid = mergedList.copy()
-    print("===============================")
-
-for x in grid:
-    print(x)
 
 totalCount = 0
 for rowIndex,row in enumerate(grid):
@@ -87,16 +63,3 @@ for rowIndex,row in enumerate(grid):
         if(col >= 1):
             totalCount+=1
 print(totalCount)
-
-"""
-for rowIndex,row in enumerate(grid):
-    for colIndex,col in enumerate(row):
-        if(col >= 1):
-            grid[rowIndex][colIndex] = "#"
-        else:
-            grid[rowIndex][colIndex] = "."
-for x in grid:
-    for y in x:
-        print(y, end="")
-    print()
-"""

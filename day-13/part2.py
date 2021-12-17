@@ -4,7 +4,6 @@ data = get_data(day=13, year=2021)
 
 instructions = data.split("\n\n")[1].splitlines()
 data = data.split("\n\n")[0].splitlines()
-#data = [*map(int, data)]
 
 with open("input.txt") as file:
     file = file.read()
@@ -36,18 +35,12 @@ def splitGrid(axis, number):
             firstHalf.append(row)
     return firstHalf, secondHalf
 
-size=[0,0]
-for coords in data:
-    current = [*map(int, coords.split(","))]
-    if(current[0] > size[0]):
-        size[0] = current[0]
-    elif(current[1] > size[1]):
-        size[1] = current[1]
+numberOfRows = int(instructions[1].split(" ")[2].split("=")[1])*2
+numberOfCols = int(instructions[0].split(" ")[2].split("=")[1])*2
 
 grid = []
-for x in range(size[1]+1):
-    grid.append([0]*(size[0]+1))
-
+for x in range(numberOfRows+1):
+    grid.append([0]*(numberOfCols+1))
 for coords in data:
     current = [*map(int, coords.split(","))]
     grid[current[1]][current[0]] = 1
@@ -70,9 +63,9 @@ for numInstruction,instruction in enumerate(instructions):
 for rowIndex,row in enumerate(grid):
     for colIndex,col in enumerate(row):
         if(col >= 1):
-            grid[rowIndex][colIndex] = "o"
+            grid[rowIndex][colIndex] = "||"
         else:
-            grid[rowIndex][colIndex] = " "
+            grid[rowIndex][colIndex] = "  "
 for x in grid:
     for y in x:
         print(y, end="")
