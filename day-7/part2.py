@@ -5,10 +5,6 @@ data = get_data(day=7, year=2021)
 data = data.split(",")
 data = [*map(int, data)]
 
-#with open('input.txt') as file:
-#    data = file.read().split(",")
-#    data = list(map(int, data)) # to int
-
 fuelUsed = sys.float_info.max
 positionAlignedTo = -1
 

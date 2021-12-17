@@ -2,7 +2,6 @@ from aocd import get_data
 
 data = get_data(day=10, year=2021)
 data = data.splitlines()
-#data = [*map(int, data)]
 
 points = {")": 3, "]": 57, "}": 1197, ">": 25137}
 totalCount = 0

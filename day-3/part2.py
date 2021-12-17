@@ -2,7 +2,6 @@ from aocd import get_data
 
 data = get_data(day=3, year=2021)
 data = data.splitlines()
-#data = [*map(int, data)]
 
 generator = ""
 scrubber = ""
@@ -28,5 +27,4 @@ def searchData(givenData, mostCommon):
 
 generator = searchData(data, True)
 scrubber = searchData(data, False)
-print(int(generator, 2), int(scrubber, 2))
 print(int(generator, 2) * int(scrubber, 2))

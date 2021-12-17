@@ -82,4 +82,3 @@ for lowPoint in lowPoints:
     basinSizes.append(len(alreadySearched))
 
 basinSizes.sort()
-#print(math.prod(basinSizes[-3:]))
