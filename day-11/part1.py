@@ -42,5 +42,4 @@ for step in range(1, 101):
             break
     for octopusCoords in alreadyFlashed:
         data[octopusCoords[0]][octopusCoords[1]] = 0
-    #print("after step {} there have been {} flashes".format(step, totalFlashes))
 print(totalFlashes)

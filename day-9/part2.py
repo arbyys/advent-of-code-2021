@@ -4,8 +4,6 @@ import math
 data = get_data(day=9, year=2021)
 data = data.splitlines()
 
-#with open("input.txt") as file:
-#    data = file.read().splitlines()
 
 for index,line in enumerate(data):
     data[index] = list(map(int, data[index]))
