@@ -6,10 +6,10 @@ instructions = data.split("\n\n")[1].splitlines()
 data = data.split("\n\n")[0].splitlines()
 #data = [*map(int, data)]
 
-#with open("input.txt") as file:
-#    file = file.read()
-#    data = file.split("\n\n")[0].splitlines()
-#    instructions = file.split("\n\n")[1].splitlines()
+with open("input.txt") as file:
+    file = file.read()
+    data = file.split("\n\n")[0].splitlines()
+    instructions = file.split("\n\n")[1].splitlines()
 
 def reverseList(axis, list):
     tempList = list.copy()
@@ -53,50 +53,27 @@ for coords in data:
     grid[current[1]][current[0]] = 1
 
 for numInstruction,instruction in enumerate(instructions):
-    if(numInstruction > 0):
-        break
     current = instruction.split(" ")[2].split("=")
     firstHalf, secondHalf = splitGrid(current[0], int(current[1]))
-    print("===============================")
-    for x in firstHalf:
-        print(x)
-    print("____")
     secondHalf = reverseList(current[0], secondHalf)
-    for x in secondHalf:
-        print(x)
 
     mergedList = []
+
     for rowIndex in range(len(firstHalf)):
         currentRow = []
         for colIndex in range(len(firstHalf[0])):
             currentRow.append(firstHalf[rowIndex][colIndex] + secondHalf[rowIndex][colIndex])
         mergedList.append(currentRow.copy())
 
-    print("===============================")
-    for x in mergedList:
-        print(x)
     grid = mergedList.copy()
-    print("===============================")
 
-for x in grid:
-    print(x)
-
-totalCount = 0
 for rowIndex,row in enumerate(grid):
     for colIndex,col in enumerate(row):
         if(col >= 1):
-            totalCount+=1
-print(totalCount)
-
-"""
-for rowIndex,row in enumerate(grid):
-    for colIndex,col in enumerate(row):
-        if(col >= 1):
-            grid[rowIndex][colIndex] = "#"
+            grid[rowIndex][colIndex] = "o"
         else:
-            grid[rowIndex][colIndex] = "."
+            grid[rowIndex][colIndex] = " "
 for x in grid:
     for y in x:
         print(y, end="")
     print()
-"""
