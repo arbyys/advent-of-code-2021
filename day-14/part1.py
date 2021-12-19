@@ -35,4 +35,5 @@ for letter in template:
         continue
     occurences[letter] += 1
 
+print({k:v for k,v in sorted(occurences.items())})
 print(max(occurences.values()) - min(occurences.values()))

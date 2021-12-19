@@ -5,11 +5,6 @@ data = get_data(day=13, year=2021)
 instructions = data.split("\n\n")[1].splitlines()
 data = data.split("\n\n")[0].splitlines()
 
-with open("input.txt") as file:
-    file = file.read()
-    data = file.split("\n\n")[0].splitlines()
-    instructions = file.split("\n\n")[1].splitlines()
-
 def reverseList(axis, list):
     tempList = list.copy()
     if(axis == "y"):
