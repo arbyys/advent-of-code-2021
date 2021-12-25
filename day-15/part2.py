@@ -7,6 +7,27 @@ data = data.splitlines()
 for index,line in enumerate(data):
     data[index] = list(line)
 
+def addOrReset(integer):
+    integer = int(integer)
+    return ("1" if (integer == 9) else str((integer+1)))
+
+currentData = data.copy()
+for i in range(4):
+    dataToAppend = currentData.copy()
+    for index,line in enumerate(dataToAppend):
+        dataToAppend[index] = "".join([addOrReset(item) for item in list(line)])
+    currentData = dataToAppend.copy()
+    data += dataToAppend.copy()
+
+for index,line in enumerate(data):
+    lineToReplace = line
+    currentLine = line
+    for i in range(4):
+        newLine = "".join([addOrReset(item) for item in list(currentLine)])
+        currentLine = newLine
+        lineToReplace += newLine
+    data[index] = lineToReplace
+
 totalRows = len(data)
 totalCols = len(data[0])
 totalPositions = totalRows*totalCols
