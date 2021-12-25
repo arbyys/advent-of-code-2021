@@ -3,9 +3,6 @@ from aocd import get_data
 data = get_data(day=21, year=2021)
 data = data.splitlines()
 
-#with open("input.txt") as file:
-#    data = file.read().splitlines()
-
 startingPositions = []
 for line in data:
     startingPositions.append(int(line.split(": ")[1]))
