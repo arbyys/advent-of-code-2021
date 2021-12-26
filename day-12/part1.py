@@ -1,55 +1,43 @@
+from collections import defaultdict
 from aocd import get_data
 
 data = get_data(day=12, year=2021)
 data = data.splitlines()
 
-with open("input.txt") as file:
-    data = file.read().splitlines()
+def dfs(currentNode, visited):
+    if(currentNode == "end"):
+        return True
+    elif(currentNode in visited):
+        return False
+    elif(currentNode in smallCaves):
+        visited.append(currentNode)
 
-graph = {}
-for path in data:
-    path = path.split("-")
-    if(path[0] in graph):
-        graph[path[0]].append(path[1])
-    else:
-        graph[path[0]] = [path[1]]
-    if(path[1] in graph):
-        graph[path[1]].append(path[0])
-    else:
-        graph[path[1]] = [path[0]]
+    pathsCount = 0
 
-tempGraph = graph.copy()
-for key in graph:
-    if(key.islower()):
-        passed = True
-        for item in graph[key]:
-            if(item.isupper()):
-                passed = False
-        if(passed):
-            for item in graph[key]:
-                tempGraph[item].remove(key)
-            tempGraph.pop(key, None)
-graph = tempGraph.copy()
+    for node in adjacent[currentNode]:
+        pathsCount += dfs(node, visited)
 
-totalPaths = 0
+    if(currentNode in visited):
+        visited.remove(currentNode)
+    return pathsCount
 
-def checkNeighbourCaves(cave, cantVisit):
-    print("current ", cave)
-    print(cantVisit)
-    print("===========")
-    global totalPaths
-    if(cave == "end"):
-        totalPaths += 1
-        return
-    if(cave.islower()):
-        cantVisit.append(cave)
-    for neighbourCave in graph[cave]:
-        if(neighbourCave not in cantVisit):
-            checkNeighbourCaves(neighbourCave, cantVisit)
+edges = []
+for line in data:
+    edges.append(line.split("-"))
 
-checkNeighbourCaves("start", [])
+adjacent = defaultdict(list)
+smallCaves = []
 
-print(totalPaths)
+for edge in edges:
+    a = edge[0]
+    b = edge[1]
+    if(a.islower()):
+        smallCaves.append(a)
+    if(b.islower()):
+        smallCaves.append(b)
 
-for key in graph:
-    print (key, '->', graph[key])
+    adjacent[a].append(b)
+    adjacent[b].append(a)
+
+result = dfs("start", [])
+print(result)
