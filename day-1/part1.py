@@ -6,11 +6,10 @@ data = [*map(int, data)]
 
 last = data[0]
 count = 0
-for i, item in enumerate(data):
-    if(i == 0):
-        continue
-    if(item > last):
+
+for i in range(1, len(data)):
+    if(data[i] > last):
         count += 1
-    last = item
+    last = data[i]
 
 print(count)
