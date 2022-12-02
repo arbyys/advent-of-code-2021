@@ -69,3 +69,4 @@ for numInstruction,instruction in enumerate(instructions):
             else:
                 print(".", end="")
         print()
+input("")

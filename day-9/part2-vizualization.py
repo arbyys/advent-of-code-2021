@@ -82,3 +82,4 @@ for lowPoint in lowPoints:
     basinSizes.append(len(alreadySearched))
 
 basinSizes.sort()
+input("")
